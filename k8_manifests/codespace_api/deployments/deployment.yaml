@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: codespace-api-deployment
+  namespace: codespace-backend-api
 spec:
   replicas: 3
   selector:

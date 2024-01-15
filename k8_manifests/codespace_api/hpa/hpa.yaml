@@ -2,6 +2,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: codespace-api-hpa
+  namespace: codespace-backend-api
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
