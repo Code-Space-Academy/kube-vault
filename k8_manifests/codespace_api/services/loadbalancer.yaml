@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: codespace-api-service
+spec:
+  selector:
+    app: codespace-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
