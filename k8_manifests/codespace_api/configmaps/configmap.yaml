@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: codespace-api-config
+data:
+  username: base64_encoded_username
+  password: base64_encoded_password
