@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: codespace-api-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: codespace-api
+  template:
+    metadata:
+      labels:
+        app: codespace-api
+    spec:
+      containers:
+        - name: codespace-api
+          image: rudolphy/codespace-api:latest
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: "0.5"
+              memory: "512Mi"
+            requests:
+              cpu: "0.2"
+              memory: "256Mi"
+          envFrom:
+            - configMapRef:
+                name: codespace-api-config
+            - secretRef:
+                name: codespace-api-secrets
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 80
+            failureThreshold: 30
